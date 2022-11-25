@@ -25,7 +25,7 @@ void  DP1(int a[12][12],int i,int j,bool visited[100][100],int row,int collumn)
 }
 void out(int a[12][12],int row,int collumn,int n,vector<int*> collect,int& count)
 {
-	int dem=0;
+	
 	fstream f;
 	f.open("./suggest_sheets/data_suggest.txt");
 	f.seekp(0,ios_base::end);
@@ -33,12 +33,8 @@ void out(int a[12][12],int row,int collumn,int n,vector<int*> collect,int& count
 	{
 		if (i+n<=collect.size())
 		{	 count++;
-			dem++;
+			
 			if (count>3) break;
-			for (int s=0;s<collect.size();s++)
-			{
-				*collect[s]=0;
-			}
 		for(int j=0;j<n;j++)
 			{
 				*collect[i+j]=3;
@@ -53,6 +49,10 @@ void out(int a[12][12],int row,int collumn,int n,vector<int*> collect,int& count
 				f<<a[k][j1]<<" ";
 				 else  f<<a[k][j1]<<" "<<endl;
 			}}
+				for (int s=0;s<collect.size();s++)
+			{
+				*collect[s]=0;
+			}
 
 			}
 	}
@@ -117,12 +117,8 @@ getline(os,ch);
 		{
 			if ( a[i][j]!=1 && visited[i][j]==false)
 			DP1(a,i,j,visited,i-2,collumn);
-			if (collect.size()>=l)
-			{
-				for (int k=0;k<collect.size();k++)
-				*collect[k]=2;
-			}
-			 else collect.clear();
+			if (collect.size()<l)
+			 collect.clear();
 	
 	if (!collect.empty())
 	{
@@ -130,47 +126,40 @@ getline(os,ch);
 	cout<<endl;
 	
 	out(a,row,collumn,l,collect,count);
-	for (int k=0;k<collect.size();k++)
-	*collect[k]=0;
-	memset(visited+i-1,false,sizeof(visited+i-1));
-	collect.clear();
+	
+	collect.clear();	
 	}
-	if (count==3) {
-	break;}			
+		
 		}
+		memset(visited+i-1,false,sizeof(visited+i-1));
+		if (count>=3) {
+	break;}		
 	}
 if (count<3)
 	{for (int i=0;i<row;i++)
 	memset(visited+i,false,sizeof(visited+i));
-		for (int i=(row+1)/2;i<row-1;i++)
+		for (int i=(row-1)/2;i<row-1;i++)
 	{
 			for (int j=0;j<collumn;j++)
 		{
 			if ( a[i][j]!=1 && visited[i][j]==false)
 			DP(a,i,j,visited,i+2,collumn);
-			if (collect.size()>=l)
-			{
-				for (int k=0;k<collect.size();k++)
-				*collect[k]=2;
-			}
-			 else collect.clear();
+			if (collect.size()<l)
+			
+			 collect.clear();
 	
 	if (!collect.empty())
 	{
 	cout<<endl;
 	out(a,row,collumn,l,collect,count);
-	for (int k=0;k<collect.size();k++)
-	*collect[k]=0;
-	memset(visited+i+1,false,sizeof(visited+i+1));
+	
 	collect.clear();
-	if 
-		(count==3) {
-	break;}	
+
 	}
 		
 		}
-		if 
-		(count==3) {
+			memset(visited+i+1,false,sizeof(visited+i+1));
+		if (count>=3) {
 	break;}	
 	}
 	} 
