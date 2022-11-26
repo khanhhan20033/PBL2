@@ -107,8 +107,8 @@ getline(os,ch);
 	}
 	bool visited[100][100];
 	for (int i=0;i<row;i++)
-	memset(visited+i,false,sizeof(false));
-
+	for (int j=0;j<collumn;j++)
+	visited[i][j]=false;
 	count =0; 
 
 		for (int i=(row-1)/2;i>0;i--)
@@ -131,7 +131,8 @@ getline(os,ch);
 	}
 		
 		}
-		memset(visited+i-1,false,sizeof(false));
+		for(int w=0;w<collumn;w+=1) 
+		visited[i-1][w]=false;
 		if (count>=3) {
 	break;}		
 	}
@@ -158,7 +159,8 @@ if (count<3)
 	}
 		
 		}
-		memset(visited+i+1,false,sizeof(false));
+		for(int w=0;w<collumn;w+=1) 
+		visited[i+1][w]=false;
 		if (count>=3) {
 	break;}	
 	}
